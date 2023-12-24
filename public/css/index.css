@@ -7,7 +7,8 @@
 }
 
 body {
-    border: 5px solid #461898;
+    height: fit-content;
+    box-sizing: content-box;
 }
 
 main {
@@ -17,9 +18,10 @@ main {
     align-items: center;
     text-align: center;
     padding: 2rem;
-    margin: 1rem;
+    margin: 0rem;
     font-family: 'Vollkorn', serif;
     border-radius: 60px 0px 60px 0px;
+    overflow-y: hidden;
 }
 
 h1 {
@@ -30,13 +32,16 @@ h1 {
 #display_question {
     font-size: 1.2rem;
     line-height: 1.7rem;
-    padding: 1.3rem;
-    margin: 1rem;
+    margin-top: 1rem;
+    padding: 1.5rem;
+    color: #4ec1ad;
     border: 3px solid #ba96ef;
     border-radius: 60px;
+    width: 100%;
 }
 
 #display_output {
+    margin-top: 1.4rem;
     color: #d5ad8b;
 }
 
@@ -47,9 +52,9 @@ input[type="text"] {
     --bg-color: #fff;
     --main-color: #461898;
     height: 3rem;
-    width: 250px;
+    width: 80%;
     padding: 1rem;
-    margin: 0.5rem 0rem 1rem 0rem;
+    margin: 1.5rem 0rem;
     font-family: 'Vollkorn', serif;
     font-size: 1.3rem;
     border-radius: 60px;
@@ -58,28 +63,31 @@ input[type="text"] {
     box-shadow: 6px 6px var(--main-color);
     color: var(--font-color);
     outline: none;
-  }
-  
-  .input::placeholder {
+    text-align: center;
+}
+
+.input::placeholder {
     color: var(--font-color-sub);
     opacity: 0.8;
-  }
-  
-  .input:focus {
+}
+
+.input:focus {
     border: 2px solid var(--input-focus);
-  }
+}
 
 button {
     border: none;
     outline: none;
-    background-color: #461898;
-    margin: 10px 0.2rem;
+    background-color: #9144e4;
+    width: 40%;
+    margin: 1rem 1rem;
     padding: 10px 1rem;
     font-size: 1.5rem;
     font-weight: 700;
+    font-family: 'Vollkorn', serif;
     border-radius: 60px;
     transition: all ease 0.1s;
-    box-shadow: 0px 10px 0px 0px #9144e4;
+    box-shadow: 0px 10px 0px 0px #461898;
 }
 
 button:active {
@@ -88,11 +96,151 @@ button:active {
 }
 
 #score {
-    margin-top: 1rem;
+    margin-top: 1.4rem;
     color: #d5ad8b;
 }
 
 footer {
+    text-align: center;
     margin-top: 2rem;
     font-size: 15px;
+}
+
+/* Développement en Mobile First : Mobile Portrait ⬆️⬆️⬆️*/
+/* Styles pour les écrans de 767 pixels de largeur ou moins (portrait) */
+
+/* Mobile Paysage */
+/* Styles pour les écrans entre 768 et 991 pixels de largeur (paysage) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    h1 {
+        margin: 2rem 0rem;
+        font-size: 6rem;
+    }
+
+    #display_question {
+        margin: 1rem 0rem;
+        font-size: 1.5rem;
+        line-height: 2rem;
+        padding: 2rem;
+        border: 5px solid #ba96ef;
+    }
+
+    #display_output {
+        margin-top: 1.5rem;
+        font-size: 1.5rem;
+    }
+
+    input[type="text"] {
+        font-size: 1.5rem;
+        height: 4rem;
+        margin: 1.7rem 0rem;
+        box-shadow: 10px 10px var(--main-color);
+    }
+
+    button {
+        margin: 1rem;
+        box-shadow: 0px 13px 0px 0px #461898;
+    }
+
+    #score {
+        margin-top: 2rem;
+        font-size: 1.5rem;
+    }
+
+    footer {
+        margin-top: 2.5rem;
+        font-size: 1.5rem;
+    }
+}
+
+/* Tablette */
+/* Styles pour les écrans entre 992 et 1199 pixels de largeur (tablettes) */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    h1 {
+        margin: 1.5rem 0rem;
+        font-size: 7.5rem;
+    }
+
+    #display_question {
+        margin: 1rem 0rem;
+        font-size: 2rem;
+        line-height: 3rem;
+        padding: 2rem;
+        border: 5px solid #ba96ef;
+    }
+
+    #display_output {
+        margin-top: 2rem;
+        font-size: 2rem;
+    }
+
+    input[type="text"] {
+        font-size: 2rem;
+        height: 5rem;
+        margin: 1.7rem 0rem;
+        box-shadow: 15px 15px var(--main-color);
+    }
+
+    button {
+        font-size: 2rem;
+        margin: 1rem;
+        padding: 1rem;
+        box-shadow: 0px 15px 0px 0px #461898;
+    }
+
+    #score {
+        margin-top: 2rem;
+        font-size: 2rem;
+    }
+
+    footer {
+        margin-top: 2.5rem;
+        font-size: 1.5rem;
+    }
+}
+
+/* Écran standard */
+/* Styles pour les écrans de 1200 pixels de largeur ou plus (écrans standard) */
+@media only screen and (min-width: 1200px) {
+    h1 {
+        margin: 1.5rem 0rem;
+        font-size: 7.5rem;
+    }
+
+    #display_question {
+        margin: 1rem 0rem;
+        font-size: 2rem;
+        line-height: 3rem;
+        padding: 2rem;
+        border: 5px solid #ba96ef;
+    }
+
+    #display_output {
+        margin-top: 2rem;
+        font-size: 2rem;
+    }
+
+    input[type="text"] {
+        font-size: 2rem;
+        height: 5rem;
+        margin: 1.7rem 0rem;
+        box-shadow: 15px 15px var(--main-color);
+    }
+
+    button {
+                font-size: 2rem;
+        margin: 1rem;
+        padding: 1rem;
+        box-shadow: 0px 15px 0px 0px #461898;
+    }
+
+    #score {
+        margin-top: 2rem;
+        font-size: 2rem;
+    }
+
+    footer {
+        margin-top: 2.5rem;
+        font-size: 1.5rem;
+    }
 }

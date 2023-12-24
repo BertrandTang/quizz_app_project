@@ -1,19 +1,3 @@
-/*
-
-Pseudo code : 
-- On veut afficher une question aléatoire (associée à une réponse)
-
-> On met un add event sur le bouton submit
-> On crée une variable contenant un tableau d'objet répertoriant les questions et réponses
-> On créé une fonction qui va prendre en paramètre ce tableau et va retourner 
-un objet aléatoire (représentant une question et sa réponse) à chaque refresh (optionnel si trop compliqué)
-> On va innerHTML le #display avec la question
-> Une fois que le bouton submit est activé avec la bonne réponse on affiche un message disant bonne réponse ! 
-> Si c'est pas la bonne réponse, on affiche un autre message
-
-bonus : on rajoute un "hint" et un bouton refresh pour changer la question
-*/
-
 const quizData = [
     {
         question: "Quelle est la capitale de la France ?",
@@ -59,29 +43,37 @@ const quizData = [
 
 let score = 0;
 let randomPair;
-let reponse;
+let reponse; // La variable est définie en amont pour la rendre disponible à tout le block code (sans ça, on ne peut pas comparer la valeur de reponse dans le if statement line 92)
+
 const score_display = document.getElementById("score");
 
-// fonction qui retourne une question/réponse aléatoire
-const randomQuestion = (array) => {
-    const randomIndex = parseInt((Math.random() * array.length) + 1); // retourne un int de 0 à array.length
-    const randomQuest = array[randomIndex - 1]; // retourne un objet de array d'indice de 0 à array.length-1 (du coup c'est les index)
-    return randomQuest;
+// Fonction qui retourne une paire Question/Réponse aléatoire
+const randomQuestRep = (array) => {
+    const randomIndex = parseInt((Math.random() * array.length));
+    const randomQR = array[randomIndex]; // randomQuestionReponse
+    return randomQR;
 }
 
+// Fonction qui fait le setup de la question (Elle lance une question aléatoire)
 const setupRandomPair = () => {
-    const randomPair = randomQuestion(quizData);
+    const randomPair = randomQuestRep(quizData);
     const question = randomPair.question;
     reponse = randomPair.reponse;
 
     const display_question = document.getElementById("display_question");
     display_question.textContent = question;
-
 }
 
 setupRandomPair()
 
 const submitForm = document.querySelector("form");
+
+/* On écoute le submit de la réponse et on compare la valeur de l'input (input.value) 
+à la réponse attendue : variable reponse qu'on a pris soin de remplir pendant le setupRandomPair. 
+
+Pour rappel, la réponse est contenue dans randomQR qui vient elle même de la fonction randomPair. 
+Pour être sûr de travailler avec la bonne paire question/réponse on a appelé la fonction dans une variable randomPair, 
+ce qui facilite la manipulation. */
 
 submitForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -89,26 +81,24 @@ submitForm.addEventListener("submit", (event) => {
     const input = document.getElementById("input");
 
     if (input.value.toLowerCase().includes(reponse.toLowerCase())) {
-        const display_output = document.getElementById("display_output");
-        display_output.textContent = "Bravo !";
-        score++;
+        score++; 
         score_display.textContent = `Votre score est de : ${score}`;
-        input.value = "";
+        input.value = ""; // On reset la réponse
+        display_output.textContent = ""; // On reset le message de mauvaise réponse
         setupRandomPair();
     } else {
         display_output.textContent = "Mauvaise réponse !";
     }
-
 });
 
 const replayButton = document.getElementById("replay");
 
 replayButton.addEventListener("click", () => {
     const display_output = document.getElementById("display_output");
-    display_output.textContent = "";
-    input.value = "";
-    score = 0;
-    score_display.textContent = "";
-    setupRandomPair();
+    display_output.textContent = ""; // On reset le message de mauvaise réponse
+    input.value = ""; // On reset la réponse
+    score = 0; // On reset le score
+    score_display.textContent = "";  // On supprime le message de score le score
+    setupRandomPair();  // On relance une partie
     
 });
